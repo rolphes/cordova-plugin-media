@@ -795,9 +795,13 @@
         [self onStatus:MEDIA_ERROR mediaId:mediaId param:
             [self createMediaErrorWithCode:MEDIA_ERR_DECODE message:nil]];
     }
-    if (self.avSession) {
-        [self.avSession setActive:NO error:nil];
-    }
+
+    // RWU: outcommented -> set session inactive throws error since an audio session from the background-mode plugin is active
+    // according to https://developer.apple.com/library/content/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/ConfiguringanAudioSession/ConfiguringanAudioSession.html#//apple_ref/doc/uid/TP40007875-CH2-SW1
+    // not deactivating a session shouldn't be a problem
+    // if (self.avSession) {
+    //    [self.avSession setActive:NO error:nil];
+    // }
 }
 
 -(void)itemDidFinishPlaying:(NSNotification *) notification {
